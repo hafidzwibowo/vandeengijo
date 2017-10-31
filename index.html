@@ -4,31 +4,38 @@
     <!-- As if this Glitch were a typical HTML CodePen... -->    
     <script src="https://rawgit.com/aframevr/aframe/master/dist/aframe-master.js"></script>
     
+    <!-- Use arrow-key-rotation component defined in separate file. -->
+    <script src="arrow-key-rotation.js"></script>
+
+    <!-- Specify our scene. -->
     <a-scene>
       <!-- The original example also has this 180 degree rotation, to appear to be going forward. -->
       <a-videosphere rotation="0 180 0" src="#hlsvideo"></a-videosphere>
       
-      <!-- Text elements for display messaging. -->
-      <a-entity id="msg" position="0 1.3 -1.5" text="align:center; 
-              width:3;
-              wrapCount:100;
-              color:red;
-              value:Click window to make the video play, if needed.">
-      </a-entity>
-      <a-entity position="0 1 -1.5" text="align:center;
-              width:3;
-              wrapCount:100;
-              color:red;
-              value:This should work with, at least:
-                    Safari Technology Preview on MacOS, Edge on Windows 10, Oculus Browser, Chrome on Android
-                    (application/x-mpegurl, which is native HLS).
-                    Firefox on MacOS / Windows, Chrome on MacOS / Windows 
-                    (video/mp4).
-                                          
-                    This may fail with, at least:
-                    Safari on MacOS / iOS (HLS and/or CORS bugs), Chromium (missing codec support).
-              ">
-      </a-entity>
+      <!-- Define camera with zero user height, movement disabled and arrow key rotation added. -->
+      <a-camera user-height="0" wasd-controls-enabled="false" arrow-key-rotation>
+        <!-- Text elements for display messaging. -->
+        <a-entity id="msg" position="0 -0.3 -1.5" text="align:center; 
+                width:3;
+                wrapCount:100;
+                color:red;
+                value:Click window to make the video play, if needed.">
+        </a-entity>
+        <a-entity position="0 -0.6 -1.5" text="align:center;
+                width:3;
+                wrapCount:100;
+                color:red;
+                value:This should work with, at least:
+                      Safari Technology Preview on MacOS, Edge on Windows 10, Oculus Browser, Chrome on Android
+                      (application/x-mpegurl, which is native HLS).
+                      Firefox on MacOS / Windows, Chrome on MacOS / Windows 
+                      (video/mp4).
+
+                      This may fail with, at least:
+                      Safari on MacOS / iOS (HLS and/or CORS bugs), Chromium (missing codec support).
+                ">
+        </a-entity>
+      </a-camera>      
       
       <!-- Don't wait for the video to load, we're going to stream it. -->
       <a-assets timeout="1">
@@ -45,6 +52,7 @@
       </a-assets>
     </a-scene>
     
+    <!-- Attach other behaviors. -->
     <script>
       var scene = document.querySelector('a-scene');
       var video = document.querySelector('#hlsvideo');

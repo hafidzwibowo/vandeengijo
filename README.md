@@ -16,7 +16,7 @@ At present, this video file is not available in WebM format.
 The browser implementation will automatically pick which source to use.
 For maximum compatibility, it is currently recommended to use MP4 format when possible.
 
-*Note that this example does not follow the recommendation because it is specifically trying to exercise native HLS playback, which as a result introduces compatibility issues with certain Safari versions at time of writing.*
+*Note that this example does not follow the above recommendation, because it is specifically trying to exercise native HLS playback... which as a result introduces compatibility issues with certain Safari versions at time of writing.*
 
 In some scenarios, [particularly with mobile browsers, 
 security rules will prevent the video from playing automatically](https://www.aerserv.com/why-does-video-autoplay-on-mobile-devices-not-work/).
