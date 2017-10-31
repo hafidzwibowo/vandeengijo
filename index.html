@@ -7,33 +7,35 @@
     <a-scene>
       <!-- The original example also has this 180 degree rotation to appear to be going forward. -->
       <a-sky rotation="0 180 0" src="#hlsvideo"></a-sky>
-      <a-entity id="msg" position="0 1.2 -1" text="align:center; 
+      <a-entity id="msg" position="0 1.4 -1" text="align:center; 
               width:3;
               wrapCount:100;
               color:red;
               value:Click window to make the video play, if needed.">
       </a-entity>
-      <a-entity position="0 1 -1" text="align:center;
+      <a-entity position="0 1.1 -1" text="align:center;
               width:3;
               wrapCount:100;
               color:red;
               value:This should work with, at least:
-                    Safari Technology Preview on MacOS, Edge on Windows 10, Oculus Browser, Chrome on Android (native HLS);
-                    Firefox on MacOS/Windows, Chrome on MacOS/Windows (video/mp4).
+                    Safari Technology Preview on MacOS, Edge on Windows 10, Oculus Browser, Chrome on Android
+                    (application/x-mpegurl, which is native HLS).
+                    Firefox on MacOS / Windows, Chrome on MacOS / Windows 
+                    (video/mp4).
+                                          
+                    This may fail with, at least:
+                    Safari on MacOS / iOS (HLS and/or CORS bugs), Chromium (missing codec support).
               ">
       </a-entity>
       
-      <!-- Don't wait for the video to load, we're going to stream it with HLS. -->
+      <!-- Don't wait for the video to load, we're probably going to stream it -->
       <a-assets timeout="1">
-        <!-- 
-        HLS format video.  
-        Using Safari Technology Preview, which has CORS fix, this plays upon click.
-        Using Safari 11, does not have CORS fix, this does not play upon click.
-        -->
-        <video id="hlsvideo" style="display:none"
-               autoplay loop crossorigin="anonymous">
+        <!-- Multiple source video. -->
+        <video id="hlsvideo" style="display:none" autoplay loop crossorigin="anonymous">
+          <!-- Native HLS video source. -->
           <source type="application/x-mpegurl"
                src="https://cdn.glitch.com/3c75540c-eaff-4599-9386-91482d2a7f43/city_halfres_hls.m3u8?1509419937804" />
+          <!-- MP4 video source. -->
           <source type="video/mp4"
                src="https://ucarecdn.com/fadab25d-0b3a-45f7-8ef5-85318e92a261/" />
         </video>
