@@ -2,8 +2,7 @@
 <html>
   <body>
     <!-- As if this Glitch were a typical HTML CodePen... -->    
-    <!-- script src="https://rawgit.com/aframevr/aframe/master/dist/aframe-master.js"></script>
-    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    <script src="https://rawgit.com/aframevr/aframe/master/dist/aframe-master.js"></script>
     
     <a-scene>
       <!-- The original example also has this 180 degree rotation, to appear to be going forward. -->
@@ -47,6 +46,7 @@
     </a-scene>
     
     <script>
+      var scene = document.querySelector('a-scene');
       var video = document.querySelector('#hlsvideo');
       var msg = document.querySelector('#msg');
       
@@ -60,6 +60,17 @@
       window.addEventListener('click', function () {
         video.paused ? video.play() : video.pause();
       });
+
+      // Play when VR display activated, if possible.
+      window.addEventListener('vrdisplayactivate', function () {
+        video.play();
+      });      
+
+      // Play when entering VR, if possible.
+      scene.addEventListener('enter-vr', function () {
+        // Wait a tick, in case a click event fires, then play.
+        setTimeout(function () { video.play(); });
+      });            
     </script>
   </body>
 </html>
