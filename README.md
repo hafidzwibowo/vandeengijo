@@ -10,9 +10,14 @@ The video is rotated 180 degrees so the viewer appears to move forward.
 The first uses [HLS](https://wikipedia.org/wiki/HTTP_Live_Streaming) format, for those browsers that support native HLS playback.
 
 The second uses [MP4](https://wikipedia.org/wiki/MPEG-4_Part_14) format, which is widely supported by available browsers.
-(At present, this video file is not available in webm format.)
-The browser implementation will automatically pick which source to use.
 
-In some scenarios, particularly with mobile browsers, 
-security rules will prevent the video from playing automatically.
-To work around this limitation, window event handlers are attached that will try to start or toggle playback based on user input such as click.
+At present, this video file is not available in webm format.
+
+The browser implementation will automatically pick which source to use.
+For maximum compatibility, it is currently recommended to use MP4 format when possible.
+
+*Note that this example does not follow the recommendation because it is specifically trying to exercise native HLS playback, which as a result introduces compatibility issues with certain Safari versions at time of writing.*
+
+In some scenarios, [particularly with mobile browsers, 
+security rules will prevent the video from playing automatically](https://www.aerserv.com/why-does-video-autoplay-on-mobile-devices-not-work/).
+To work around this limitation, window event handlers are attached that will try to start or toggle playback [based on user input (here specifically, `click`)](https://github.com/WICG/interventions/issues/12).
