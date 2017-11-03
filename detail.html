@@ -8,7 +8,7 @@
     <script src="arrow-key-rotation.js"></script>
 
     <!-- Specify our scene. -->
-    <a-scene>
+    <a-scene stats>
       <!-- The original example also has this 180 degree rotation, to appear to be going forward. -->
       <a-videosphere rotation="0 180 0" src="#video"></a-videosphere>
       
@@ -21,13 +21,30 @@
                 color:red;
                 value:Click window to make the video play, if needed.">
         </a-entity>
+        <a-entity position="0 -0.6 -1.5" text="align:center;
+                width:3;
+                wrapCount:100;
+                color:red;
+                value:This should work with, at least:
+                      Safari Technology Preview on MacOS, Edge on Windows 10, Oculus Browser, Samsung Internet, Chrome on Android
+                      (application/x-mpegurl, which is native HLS).
+                      Firefox on MacOS / Windows, Chrome on MacOS / Windows 
+                      (video/mp4).
+
+                      This may fail with, at least:
+                      Safari on MacOS / iOS (HLS and/or CORS bugs), Chromium (missing codec support).
+                ">
+        </a-entity>
       </a-camera>      
       
       <!-- Don't wait for the video to load, we're going to stream it. -->
       <a-assets timeout="1">
-        <!-- Single source video. -->
+        <!-- Multiple source video. -->
         <!-- A-Frame will add other properties such as crossorigin="anonymous" and playsinline. -->
         <video id="video" style="display:none" autoplay loop>
+          <!-- Native HLS video source. -->
+          <source type="application/x-mpegurl"
+               src="https://cdn.glitch.com/3c75540c-eaff-4599-9386-91482d2a7f43/city_halfres_hls.m3u8?1509419937804" />
           <!-- MP4 video source. -->
           <source type="video/mp4"
                src="https://ucarecdn.com/fadab25d-0b3a-45f7-8ef5-85318e92a261/" />
@@ -44,7 +61,7 @@
       // When we get the playing event, show what source is used and what type it is.
       video.addEventListener('playing', function () {
         var currentSource = video.querySelector('[src="' + video.currentSrc + '"]');
-        msg.setAttribute('text', 'value', '');                
+        msg.setAttribute('text', 'value', video.currentSrc + '\n' + currentSource.type);                
       });
       
       // Toggle play / pause when clicked.
