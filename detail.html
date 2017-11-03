@@ -10,7 +10,7 @@
     <script src="play-on-vrdisplayactivate-or-enter-vr.js"></script>
 
     <!-- Specify our scene. -->
-    <a-scene>
+    <a-scene stats>
       <!-- The original example also has this 180 degree rotation, to appear to be going forward. -->
       <a-videosphere rotation="0 180 0" src="#video" 
                      toggle-play-on-window-click
@@ -59,7 +59,6 @@
     
     <!-- Attach other behaviors. -->
     <script>
-      var scene = document.querySelector('a-scene');
       var video = document.querySelector('#video');
       var msg = document.querySelector('#msg');
       
@@ -68,22 +67,6 @@
         var currentSource = video.querySelector('[src="' + video.currentSrc + '"]');
         msg.setAttribute('text', 'value', video.currentSrc + '\n' + currentSource.type);                
       });
-      
-      // Toggle play / pause when clicked.
-      window.addEventListener('click', function () {
-        video.paused ? video.play() : video.pause();
-      });
-
-      // Play when VR display activated, if possible.
-      window.addEventListener('vrdisplayactivate', function () {
-        video.play();
-      });      
-
-      // Play when entering VR, if possible.
-      scene.addEventListener('enter-vr', function () {
-        // Wait a tick, in case a click event fires, then play.
-        setTimeout(function () { video.play(); });
-      });            
     </script>
   </body>
 </html>
