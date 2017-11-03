@@ -4,13 +4,18 @@
     <!-- As if this Glitch were a typical HTML CodePen... -->    
     <script src="https://rawgit.com/aframevr/aframe/master/dist/aframe-master.js"></script>
     
-    <!-- Use arrow-key-rotation component defined in separate file. -->
+    <!-- Use components defined in separate files. -->
     <script src="arrow-key-rotation.js"></script>
+    <script src="toggle-play-on-window-click.js"></script>
+    <script src="play-on-vrdisplayactivate-or-enter-vr.js"></script>
 
     <!-- Specify our scene. -->
     <a-scene>
       <!-- The original example also has this 180 degree rotation, to appear to be going forward. -->
-      <a-videosphere rotation="0 180 0" src="#video"></a-videosphere>
+      <a-videosphere rotation="0 180 0" src="#video" 
+                     toggle-play-on-window-click
+                     play-on-vrdisplayactivate-or-enter-vr>
+      </a-videosphere>
       
       <!-- Define camera with zero user height, movement disabled and arrow key rotation added. -->
       <a-camera user-height="0" wasd-controls-enabled="false" arrow-key-rotation>
@@ -46,12 +51,12 @@
         var currentSource = video.querySelector('[src="' + video.currentSrc + '"]');
         msg.setAttribute('text', 'value', '');                
       });
-      
+/*      
       // Toggle play / pause when clicked.
       window.addEventListener('click', function () {
         video.paused ? video.play() : video.pause();
       });
-
+*/
       // Play when VR display activated, if possible.
       window.addEventListener('vrdisplayactivate', function () {
         video.play();

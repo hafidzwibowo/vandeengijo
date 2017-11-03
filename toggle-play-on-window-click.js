@@ -10,6 +10,7 @@ AFRAME.registerComponent('toggle-play-on-window-click', {
   },
   onClick: function (evt) {
     var video = this.el.components.material.material.map.image;
+    if (!video) { return; }
     video.paused ? video.play() : video.pause();
   }
 });
